@@ -12,7 +12,7 @@ const Home = props => {
     <>
       <Header />
       <div className="home-container">
-        <h1>
+        <h1 className="home-heading">
           Find The Job That <br />
           Fit Your Life
         </h1>

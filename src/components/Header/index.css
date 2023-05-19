@@ -1,0 +1,90 @@
+.nav-bar-container {
+  background-color: #202020;
+  height: 70px;
+  padding: 5px;
+}
+
+.header-ul-container {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  align-items: center;
+  margin-top: 0px;
+}
+
+.logo-container {
+  margin-left: 10px;
+}
+
+.logo-image {
+  width: 100px;
+}
+
+.home-job-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+}
+
+.home-icon {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .home-icon {
+    display: block;
+  }
+  .nav-text {
+    display: none;
+  }
+  .job {
+    display: block !important;
+    margin-left: 15px;
+  }
+}
+
+.nav-text {
+  font-size: 22px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.link-item {
+  text-decoration: none;
+}
+
+.logout-icon {
+  display: none;
+}
+
+.logout-btn {
+  background-color: #4f46e5;
+  color: #f1f5f9;
+  font-size: 16px;
+  font-family: 'Robot';
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+}
+
+@media screen and (max-width: 767px) {
+  .logout-btn {
+    display: none;
+  }
+  .logout-icon {
+    display: block;
+    color: #4f46e5;
+  }
+  .logo-image {
+    width: 100%;
+    height: 100%;
+  }
+  .logo-container {
+    width: 20%;
+  }
+}

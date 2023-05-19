@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import Loader from 'react-router-dom'
+import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import Header from '../Header'
@@ -83,7 +83,7 @@ class AllJobs extends Component {
     }
     const response = await fetch(apiUrlProfile, optionsProfile)
     if (response.ok === true) {
-      const dataProfile = [await response.json()]
+      const dataProfile = await response.json()
       const updatedProfileData = dataProfile.profile_details.map(eachItem => ({
         name: eachItem.name,
         profileImageUrl: eachItem.profile_image_url,
@@ -92,7 +92,7 @@ class AllJobs extends Component {
       this.setState({
         profileData: updatedProfileData,
         responseSuccess: true,
-        apiStatus: apiStatusConstants.failure,
+        apiStatus: apiStatusConstants.success,
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})

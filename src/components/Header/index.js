@@ -15,7 +15,7 @@ const Header = props => {
     <nav className="nav-bar-container">
       <ul className="header-ul-container">
         <li className="logo-container">
-          <Link to="/">
+          <Link to="/" className="link-item">
             <img
               src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
               alt="website logo"
@@ -24,12 +24,12 @@ const Header = props => {
           </Link>
         </li>
         <li className="home-job-container">
-          <Link to="/">
+          <Link to="/" className="link-item">
             <ImHome className="home-icon" />
             <h1 className="nav-text">Home</h1>
           </Link>
-          <Link to="/jobs">
-            <h1 className="nav-text">Jobs</h1>
+          <Link to="/jobs" className="link-item ">
+            <h1 className="nav-text job">Jobs</h1>
           </Link>
         </li>
         <li>
