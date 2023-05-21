@@ -75,19 +75,22 @@ class AllJobs extends Component {
   }
 
   getProfile = async () => {
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiUrlProfile = 'https://apis.ccbp.in/profile'
     const optionsProfile = {
-      header: {Authorization: `Bearer ${jwtToken}`},
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
       method: 'GET',
     }
     const response = await fetch(apiUrlProfile, optionsProfile)
     if (response.ok === true) {
-      const dataProfile = await response.json()
-      const updatedProfileData = dataProfile.profile_details.map(eachItem => ({
-        name: eachItem.name,
-        profileImageUrl: eachItem.profile_image_url,
-        shortBio: eachItem.short_bio,
+      const dataProfile = [await response.json()]
+      const updatedProfileData = dataProfile.map(eachItem => ({
+        name: eachItem.profile_details.name,
+        profileImageUrl: eachItem.profile_details.profile_image_url,
+        shortBio: eachItem.profile_details.short_bio,
       }))
       this.setState({
         profileData: updatedProfileData,
@@ -101,11 +104,11 @@ class AllJobs extends Component {
 
   getJobData = async () => {
     this.setState({apiJobStatus: apiJobStatusConstants.inProgress})
-    const jwtToken = Cookies.get('jwt_Token')
+    const jwtToken = Cookies.get('jwt_token')
     const {checkboxInputs, radioInput, searchInput} = this.state
     const apiJobUrl = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimum_package=${radioInput}&search=${searchInput}`
     const options = {
-      header: {
+      headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
@@ -151,16 +154,19 @@ class AllJobs extends Component {
       )
     } else {
       const filteredData = checkboxInputs.filter(
-        eachItem => eachItem !== event.target.id,
+        eachItem => eachItem.id !== event.target.id,
       )
-      this.setState({checkboxInputs: filteredData}, this.getJobData)
+      this.setState(
+        prevState => ({checkboxInputs: filteredData}),
+        this.getJobData,
+      )
     }
   }
 
   renderProfileView = () => {
     const {profileData, responseSuccess} = this.state
     if (responseSuccess) {
-      const {name, profileImageUrl, shortBio} = profileData
+      const {name, profileImageUrl, shortBio} = profileData[0]
       return (
         <div className="profile-container">
           <img src={profileImageUrl} alt="profile" className="profile-icon" />
@@ -233,6 +239,7 @@ class AllJobs extends Component {
 
   renderJobView = () => {
     const {jobsData} = this.state
+    console.log(jobsData)
     const noJobs = jobsData.length === 0
     return noJobs ? (
       <div className="no-jobs-container">
@@ -327,16 +334,17 @@ class AllJobs extends Component {
             {this.onGetCheckboxView()}
             <hr className="hr-line" />
             <h1 className="text">Salary Range</h1>
-            {this.onGetRadioOption()}
+            {this.onGetRadioView()}
           </div>
           <div className="Job-container">
-            <div>
+            <div className="search-box-container">
               <input
                 type="search"
                 className="search-input"
                 value={searchInput}
                 onChange={this.onGetSearchInput}
                 onKeyDown={this.onEnterSearchInput}
+                placeholder="Search"
               />
               <button
                 className="search-btn"

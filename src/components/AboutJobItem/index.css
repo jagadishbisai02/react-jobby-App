@@ -1,0 +1,149 @@
+.job-details-view-container {
+  background-color: #000000;
+  flex-grow: 1;
+  padding: 40px;
+  height: 250vh;
+}
+
+.job-item-container {
+  list-style-type: none;
+  border-radius: 10px;
+  padding: 35px;
+  margin-bottom: 20px;
+  background-color: #272727 !important;
+  font-family: 'Roboto';
+  color: #ffffff;
+}
+
+.image-title-container {
+  display: flex;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+.title-rating-container {
+  margin-top: 0px;
+}
+
+.location-package-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.location-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+}
+
+.employee-type-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+}
+
+.location-icon {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-right: 5px;
+}
+
+.briefcase-icon {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-right: 5px;
+}
+
+.horizontal-line {
+  width: 100%;
+  border: 2px solid #2c364c;
+}
+
+.description-visit-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px;
+}
+
+.skill-heading {
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.li-job-detail-container {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  flex-grow: 1;
+}
+
+.skill-image {
+  margin-right: 15px;
+}
+
+.ul-job-detail-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.company-life-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.life-heading-para-container {
+  display: flex;
+}
+
+.life-at-company-description {
+  width: 60%;
+  padding-right: 60px;
+}
+
+.life-at-company-image {
+  width: 40%;
+  border-radius: 15px;
+}
+
+.similar-jobs-heading {
+  color: #ffffff;
+}
+
+.similar-job-ul-container {
+  display: flex;
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+@media screen and (max-width: 767px) {
+  .ul-job-detail-container {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .li-job-detail-container {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  .similar-job-ul-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .life-at-company-description {
+    width: 100%;
+  }
+  .life-at-company-image {
+    height: 250px;
+    margin-left: 0px;
+  }
+}

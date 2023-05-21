@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import {AiFillStar} from 'react-icons/ai'
 import {MdLocationOn} from 'react-icons/md'
 import {BiLinkExternal} from 'react-icons/bi'
+import {BsBriefcase} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import SimilarJobs from '../SimilarJobs'
@@ -26,17 +27,17 @@ class AboutJobItem extends Component {
     this.getJobData()
   }
 
-  getJobData = async props => {
-    const {match} = props
+  getJobData = async () => {
+    const {match} = this.props
     const {params} = match
     const {id} = params
 
-    const jwtToken = Cookies.get('jwt_Token')
+    const jwtToken = Cookies.get('jwt_token')
 
     const apiUrl = `https://apis.ccbp.in/jobs/${id}`
 
     const options = {
-      header: {
+      headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
@@ -54,8 +55,8 @@ class AboutJobItem extends Component {
         id: eachJob.id,
         jobDescription: eachJob.job_description,
         lifeAtCompany: {
-          description: eachJob.description,
-          imageUrl: eachJob.image_url,
+          description: eachJob.life_at_company.description,
+          imageUrl: eachJob.life_at_company.image_url,
         },
         location: eachJob.location,
         packagePerAnnum: eachJob.package_per_annum,
@@ -101,7 +102,6 @@ class AboutJobItem extends Component {
         skills,
         title,
         rating,
-        description,
       } = jobDetails[0]
 
       return (
@@ -114,12 +114,12 @@ class AboutJobItem extends Component {
                   alt="job detail company logo"
                   className="company-logo"
                 />
-              </div>
-              <div className="title-rating-container">
-                <h1 className="title-heading">{title}</h1>
-                <div className="star-rating-container">
-                  <AiFillStar className="star-icon" />
-                  <p className="rating-text">{rating}</p>
+                <div className="title-rating-container">
+                  <h1 className="title-heading">{title}</h1>
+                  <div className="star-rating-container">
+                    <AiFillStar className="star-icon" />
+                    <p className="rating-text">{rating}</p>
+                  </div>
                 </div>
               </div>
               <div className="location-package-container">
@@ -128,7 +128,8 @@ class AboutJobItem extends Component {
                     <MdLocationOn className="location-icon" />
                     <p className="location">{location}</p>
                   </div>
-                  <div className="employee-type-icon-employee-type-container">
+                  <div className="employee-type-container">
+                    <BsBriefcase className="briefcase-icon" />
                     <p className="job-type">{employmentType}</p>
                   </div>
                 </div>
@@ -137,36 +138,42 @@ class AboutJobItem extends Component {
                 </div>
               </div>
             </div>
-          </div>
-          <hr className="horizontal-line" />
-          <div className="second-part-container">
-            <div className="description-visit-container">
-              <h1 className="description">{description}</h1>
-              <a className="visit-anchor" href={companyWebsiteUrl}>
-                Visit <BiLinkExternal />
-              </a>
+            <hr className="horizontal-line" />
+            <div className="second-part-container">
+              <div className="description-visit-container">
+                <h1 className="description">Description</h1>
+                <a className="visit-anchor" href={companyWebsiteUrl}>
+                  Visit <BiLinkExternal />
+                </a>
+              </div>
+              <p className="description-para">{jobDescription}</p>
             </div>
-            <p className="description-para">{jobDescription}</p>
-          </div>
-          <h1>Skill</h1>
-          <ul className="ul-job-detail-container">
-            {skills.map(eachItem => (
-              <li className="li-job-detail-container" key={eachItem.name}>
-                <img
-                  src={eachItem.imageUrl}
-                  alt={eachItem.name}
-                  className="skill-image"
-                />
-                <p>{eachItem.name}</p>
-              </li>
-            ))}
-          </ul>
-          <div className="company-life-img-container">
-            <div className="life-heading-para-container">
+            <h1 className="skill-heading">Skill</h1>
+            <ul className="ul-job-detail-container">
+              {skills.map(eachItem => (
+                <li className="li-job-detail-container" key={eachItem.name}>
+                  <img
+                    src={eachItem.imageUrl}
+                    alt={eachItem.name}
+                    className="skill-image"
+                  />
+                  <p className="skill-name">{eachItem.name}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="company-life-img-container">
               <h1>Life at Company</h1>
-              <p>{lifeAtCompany.description}</p>
+              <div className="life-heading-para-container">
+                <p className="life-at-company-description">
+                  {lifeAtCompany.description}
+                </p>
+                <img
+                  src={lifeAtCompany.imageUrl}
+                  alt="life at company"
+                  className="life-at-company-image"
+                />
+              </div>
             </div>
-            <img src={lifeAtCompany.imageUrl} alt="life at company" />
           </div>
           <h1 className="similar-jobs-heading">Similar Jobs</h1>
           <ul className="similar-job-ul-container">

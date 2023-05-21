@@ -1,13 +1,14 @@
 import {Link} from 'react-router-dom'
 import {MdLocationOn} from 'react-icons/md'
 import {AiFillStar} from 'react-icons/ai'
+import {BsBriefcase} from 'react-icons/bs'
 import './index.css'
 
 const JobItem = props => {
   const {jobDetails} = props
   const {
     companyLogoUrl,
-    employeeType,
+    employmentType,
     jobDescription,
     id,
     location,
@@ -41,7 +42,8 @@ const JobItem = props => {
                 <p className="location">{location}</p>
               </div>
               <div className="employment-type-container">
-                <p className="employment-type">{employeeType}</p>
+                <BsBriefcase className="briefcase-icon" />
+                <p className="employment-type">{employmentType}</p>
               </div>
             </div>
             <div>
