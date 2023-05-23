@@ -12,13 +12,10 @@ const Home = props => {
     <>
       <Header />
       <div className="home-container">
-        <h1 className="home-heading">
-          Find The Job That <br />
-          Fit Your Life
-        </h1>
+        <h1 className="home-heading">Find The Job That Fits Your Life</h1>
         <p className="home-paragraph">
-          Millions of people are searching for the jobs, salary information,
-          company reviews. Find the job that fits your abilities and potential.
+          Millions of people are searching for jobs, salary information, company
+          reviews. Find the job that fits your abilities and potential.
         </p>
         <Link to="/jobs" className="retry-btn-link">
           <button

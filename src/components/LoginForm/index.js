@@ -49,7 +49,10 @@ class LoginForm extends Component {
 
     return (
       <div className="login-container">
-        <form className="login-form-container" onClick={this.onSubmitLoginForm}>
+        <form
+          className="login-form-container"
+          onSubmit={this.onSubmitLoginForm}
+        >
           <div className="form-logo-container">
             <img
               src="https://assets.ccbp.in/frontend/react-js/logo-img.png"

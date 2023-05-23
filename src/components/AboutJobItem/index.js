@@ -148,7 +148,7 @@ class AboutJobItem extends Component {
               </div>
               <p className="description-para">{jobDescription}</p>
             </div>
-            <h1 className="skill-heading">Skill</h1>
+            <h1 className="skill-heading">Skills</h1>
             <ul className="ul-job-detail-container">
               {skills.map(eachItem => (
                 <li className="li-job-detail-container" key={eachItem.name}>

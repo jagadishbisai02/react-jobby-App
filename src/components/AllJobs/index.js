@@ -121,6 +121,7 @@ class AllJobs extends Component {
         employmentType: eachJob.employment_type,
         jobDescription: eachJob.job_description,
         packagePerAnnum: eachJob.package_per_annum,
+        location: eachJob.location,
         title: eachJob.title,
         rating: eachJob.rating,
         id: eachJob.id,
@@ -137,7 +138,7 @@ class AllJobs extends Component {
   }
 
   onGetRadioOption = event => {
-    this.setState({radioInput: event.target.value}, this.getJobData)
+    this.setState({radioInput: event.target.id}, this.getJobData)
   }
 
   onGetInputOption = event => {
@@ -145,6 +146,7 @@ class AllJobs extends Component {
     const inputNotInList = checkboxInputs.filter(
       eachItem => eachItem === event.target.id,
     )
+    console.log(inputNotInList)
     if (inputNotInList.length === 0) {
       this.setState(
         prevState => ({
@@ -154,7 +156,7 @@ class AllJobs extends Component {
       )
     } else {
       const filteredData = checkboxInputs.filter(
-        eachItem => eachItem.id !== event.target.id,
+        eachItem => eachItem !== event.target.id,
       )
       this.setState(
         prevState => ({checkboxInputs: filteredData}),
@@ -221,7 +223,7 @@ class AllJobs extends Component {
         alt="failure view"
         className="failure-image"
       />
-      <h1 className="failure-heading">Oops! Something Went to Wrong</h1>
+      <h1 className="failure-heading">Oops! Something Went Wrong</h1>
       <p className="failure-paragraph">
         We cannot seem to find the page your looking for
       </p>
@@ -239,7 +241,6 @@ class AllJobs extends Component {
 
   renderJobView = () => {
     const {jobsData} = this.state
-    console.log(jobsData)
     const noJobs = jobsData.length === 0
     return noJobs ? (
       <div className="no-jobs-container">
@@ -249,7 +250,7 @@ class AllJobs extends Component {
           className="no-jobs-image"
         />
         <h1>No jobs found</h1>
-        <p>We could not fond any jobs. Try other filter.</p>
+        <p>We could not find any jobs. Try other filters</p>
       </div>
     ) : (
       <ul className="ul-job-item-container">
@@ -277,11 +278,11 @@ class AllJobs extends Component {
   onGetCheckboxView = () => (
     <ul className="checkbox-container">
       {employmentTypesList.map(eachItem => (
-        <li className="li-container" key={eachItem.salaryRangeId}>
+        <li className="li-container" key={eachItem.employmentTypeId}>
           <input
-            id={eachItem.salaryRangeId}
+            id={eachItem.employmentTypeId}
             className="input"
-            type="radio"
+            type="checkbox"
             onChange={this.onGetInputOption}
           />
           <label className="label" htmlFor={eachItem.salaryRangeId}>
@@ -315,7 +316,11 @@ class AllJobs extends Component {
     this.setState({searchInput: event.target.value})
   }
 
-  onSubmitSearchInput = event => {
+  onSubmitSearchInput = () => {
+    this.getJobData()
+  }
+
+  onEnterSearchInput = event => {
     if (event.key === 'Enter') {
       this.getJobData()
     }
